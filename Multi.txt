@@ -1,0 +1,33 @@
+/* This sketch tries to connect with the best ssid
+*/
+
+#include <ESP8266WiFi.h>
+#include <ESP8266WiFiMulti.h>
+
+ESP8266WiFiMulti wifiMulti;
+
+void setup() {
+  Serial.begin(115200);
+  delay(10);
+
+  WiFi.mode(WIFI_STA);
+  wifiMulti.addAP("Vivekanand", "Shreyas@7DTU");
+  wifiMulti.addAP("Redmi6 pro", "Shreyas@7");
+ 
+ }
+
+void loop() {
+  if (wifiMulti.run() != WL_CONNECTED) {
+    Serial.println("WiFi not connected!");
+    delay(1000);
+  }
+   if (wifiMulti.run() == WL_CONNECTED) {
+    Serial.println("");
+    Serial.println("WiFi connected");
+    Serial.println(WiFi.SSID());  //--> Name the the access point to which ESP is connected
+    
+    Serial.println("IP address: ");
+    Serial.println(WiFi.localIP());
+    delay(1000);
+   }
+}
